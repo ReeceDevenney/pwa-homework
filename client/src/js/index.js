@@ -2,9 +2,17 @@ import { Workbox } from 'workbox-window';
 import Editor from './editor';
 import './database';
 import '../css/style.css';
+import logo from "../images/logo.png"
 
 const main = document.querySelector('#main');
 main.innerHTML = '';
+
+window.addEventListener('load', function () {
+  let Logo = document.getElementById('logo')
+  Logo.style.height = '96px'
+  Logo.style.width = '96px'
+  Logo.src = logo;
+});
 
 const loadSpinner = () => {
   const spinner = document.createElement('div');
@@ -24,10 +32,10 @@ if (typeof editor === 'undefined') {
 }
 
 // Check if service workers are supported
-// if ('serviceWorker' in navigator) {
-//   // register workbox service worker
-//   const workboxSW = new Workbox('/src-sw.js');
-//   workboxSW.register();
-// } else {
-//   console.error('Service workers are not supported in this browser.');
-// }
+if ('serviceWorker' in navigator) {
+  // register workbox service worker
+  const workboxSW = new Workbox('/src-sw.js');
+  workboxSW.register();
+} else {
+  console.error('Service workers are not supported in this browser.');
+}
